@@ -284,7 +284,7 @@ public class RdbSyncService {
 
             Integer type = ctype.get(Util.cleanColumn(targetColumnName).toLowerCase());
             if (type == null) {
-                throw new RuntimeException("Target column: " + targetColumnName + " not matched");
+                throw new RuntimeException("rdb insert Target column: " + targetColumnName + " not matched");
             }
             Object value = data.get(srcColumnName);
             BatchExecutor.setValue(values, type, value);
@@ -347,7 +347,7 @@ public class RdbSyncService {
                     updateSql.append(backtick).append(targetColumnName).append(backtick).append("=?, ");
                     Integer type = ctype.get(Util.cleanColumn(targetColumnName).toLowerCase());
                     if (type == null) {
-                        throw new RuntimeException("Target column: " + targetColumnName + " not matched");
+                        throw new RuntimeException("rdb update Target column: " + targetColumnName + " not matched");
                     }
                     BatchExecutor.setValue(values, type, data.get(srcColumnName));
                 }
@@ -381,6 +381,12 @@ public class RdbSyncService {
         }
 
         DbMapping dbMapping = config.getDbMapping();
+        Boolean executeDelete = dbMapping.getExecuteDelete();
+        if (!executeDelete) {
+            logger.info("Do not execute delete： TargetTable: {}, executeDelete: {},data: {}",
+                    dbMapping.getTargetTable(), executeDelete,JSON.toJSONString(data));
+            return;
+        }
         Map<String, Integer> ctype = getTargetColumnType(batchExecutor.getConn(), config);
 
         StringBuilder sql = new StringBuilder();
@@ -470,10 +476,16 @@ public class RdbSyncService {
             if (srcColumnName == null) {
                 srcColumnName = Util.cleanColumn(targetColumnName);
             }
-            sql.append(backtick).append(targetColumnName).append(backtick).append("=? AND ");
-            Integer type = ctype.get(Util.cleanColumn(targetColumnName).toLowerCase());
+
+//            sql.append(backtick).append(targetColumnName).append(backtick).append("=? AND ");
+//            Integer type = ctype.get(Util.cleanColumn(targetColumnName).toLowerCase());
+
+            sql.append(backtick).append(srcColumnName).append(backtick).append("=? AND ");
+            Integer type = ctype.get(Util.cleanColumn(srcColumnName).toLowerCase());
+//            logger.info("492 dbMapping: {}, sql: {},ctype: {},values: {},data: {},old: {},o: {}",dbMapping.toString(), sql,ctype.toString(),values.toString(),d,o);
             if (type == null) {
-                throw new RuntimeException("Target column: " + targetColumnName + " not matched");
+//                throw new RuntimeException("489 rdb appendCondition Target column: " + targetColumnName + " not matched");
+                throw new RuntimeException("489 rdb appendCondition Target column: " + srcColumnName + " not matched");
             }
             // 如果有修改主键的情况
             if (o != null && o.containsKey(srcColumnName)) {

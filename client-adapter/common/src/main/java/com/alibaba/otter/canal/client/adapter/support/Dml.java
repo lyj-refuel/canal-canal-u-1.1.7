@@ -136,10 +136,92 @@ public class Dml implements Serializable {
         sql = null;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Dml{" + "destination='" + destination + '\'' + ", database='" + database + '\'' + ", table='" + table
+//               + '\'' + ", type='" + type + '\'' + ", es=" + es + ", ts=" + ts + ", sql='" + sql + '\'' + ", data="
+//               + data + ", old=" + old + '}';
+//    }
+
     @Override
     public String toString() {
-        return "Dml{" + "destination='" + destination + '\'' + ", database='" + database + '\'' + ", table='" + table
-               + '\'' + ", type='" + type + '\'' + ", es=" + es + ", ts=" + ts + ", sql='" + sql + '\'' + ", data="
-               + data + ", old=" + old + '}';
+        StringBuilder sb = new StringBuilder("Dml{");
+
+        // 输出destination属性
+        sb.append("destination='").append(destination).append('\'');
+        sb.append(", ");
+
+        // 输出groupId属性
+        sb.append("groupId='").append(groupId).append('\'');
+        sb.append(", ");
+
+        // 输出database属性
+        sb.append("database='").append(database).append('\'');
+        sb.append(", ");
+
+        // 输出table属性
+        sb.append("table='").append(table).append('\'');
+        sb.append(", ");
+
+        // 输出pkNames属性，对列表进行格式化输出
+        sb.append("pkNames=[");
+        if (pkNames!= null) {
+            for (int i = 0; i < pkNames.size(); i++) {
+                sb.append(pkNames.get(i));
+                if (i < pkNames.size() - 1) {
+                    sb.append(", ");
+                }
+            }
+        }
+        sb.append("], ");
+
+        // 输出isDdl属性
+        sb.append("isDdl=").append(isDdl);
+        sb.append(", ");
+
+        // 输出type属性
+        sb.append("type='").append(type).append('\'');
+        sb.append(", ");
+
+        // 输出es属性
+        sb.append("es=").append(es);
+        sb.append(", ");
+
+        // 输出ts属性
+        sb.append("ts=").append(ts);
+        sb.append(", ");
+
+        // 输出sql属性
+        sb.append("sql='").append(sql).append('\'');
+        sb.append(", ");
+
+        // 输出data属性，对列表中的Map进行格式化输出（简单示例，可根据实际需求进一步优化格式）
+        sb.append("data=[");
+        if (data!= null) {
+            for (int i = 0; i < data.size(); i++) {
+                Map<String, Object> map = data.get(i);
+                sb.append(map.toString());
+                if (i < data.size() - 1) {
+                    sb.append(", ");
+                }
+            }
+        }
+        sb.append("], ");
+
+        // 输出old属性，同样对列表中的Map进行格式化输出
+        sb.append("old=[");
+        if (old!= null) {
+            for (int i = 0; i < old.size(); i++) {
+                Map<String, Object> map = old.get(i);
+                sb.append(map.toString());
+                if (i < old.size() - 1) {
+                    sb.append(", ");
+                }
+            }
+        }
+        sb.append("]");
+
+        sb.append('}');
+        return sb.toString();
     }
 }

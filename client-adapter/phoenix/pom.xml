@@ -115,7 +115,7 @@
 <!--                                    </fileset>-->
 <!--                                </copy>-->
 <!--                            </tasks>-->
-                            <tasks>
+                            <target>
                                 <copy todir="${project.basedir}/../launcher/target/canal-adapter/conf/phoenix" overwrite="true">
                                     <fileset dir="${project.basedir}/target/classes/phoenix" erroronmissingdir="true">
                                         <include name="*.yml" />
@@ -131,7 +131,7 @@
                                         <include name="*.yml" />
                                     </fileset>
                                 </copy>
-                            </tasks>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>

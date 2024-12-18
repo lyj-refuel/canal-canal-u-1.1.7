@@ -68,13 +68,13 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <copy todir="${project.basedir}/../launcher/target/classes/hbase" overwrite="true">
                                     <fileset dir="${project.basedir}/target/classes/hbase" erroronmissingdir="true">
                                         <include name="*.yml" />
                                     </fileset>
                                 </copy>
-                            </tasks>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>

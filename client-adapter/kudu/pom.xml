@@ -65,13 +65,13 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <copy todir="${project.basedir}/../launcher/target/classes/kudu" overwrite="true">
                                     <fileset dir="${project.basedir}/target/classes/kudu" erroronmissingdir="true">
                                         <include name="*.yml" />
                                     </fileset>
                                 </copy>
-                            </tasks>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>

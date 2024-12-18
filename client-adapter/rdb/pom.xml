@@ -76,13 +76,13 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <copy todir="${project.basedir}/../launcher/target/classes/rdb" overwrite="true">
                                     <fileset dir="${project.basedir}/target/classes/rdb" erroronmissingdir="true">
                                         <include name="*.yml" />
                                     </fileset>
                                 </copy>
-                            </tasks>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>

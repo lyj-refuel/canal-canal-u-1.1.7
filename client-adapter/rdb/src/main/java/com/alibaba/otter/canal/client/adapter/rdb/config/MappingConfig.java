@@ -111,6 +111,17 @@ public class MappingConfig implements AdapterConfig {
 
         private Map<String, String> allMapColumns;
 
+        private boolean             executeDelete = true;                        // delete同步操作是否执行,true 删除数据
+
+
+        public Boolean getExecuteDelete() {
+            return executeDelete;
+        }
+
+        public void setExecuteDelete(Boolean executeDelete) {
+            this.executeDelete = executeDelete;
+        }
+
         public boolean getMirrorDb() {
             return mirrorDb;
         }
